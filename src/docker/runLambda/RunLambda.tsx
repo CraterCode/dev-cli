@@ -33,14 +33,23 @@ export const RunLambda: FC<{
         }, [])
         useEffect(() => {
             if (imageId) {
-                console.log(imageId)
-                const dockerProcess = spawn('docker', [
+                // Define your command and arguments
+                const command = 'docker';
+                const args = [
                     'run',
                     '--platform', 'linux/amd64',
+                    '-p', '3000:8080',
+                    '-d', `${imageId}`
+                ];
+                const dockerProcess = spawn('docker', [
+                    'run',
+                    // '--platform', 'linux/amd64',
                     '-p', `${port}:8080`,
                     '-d', `${imageId}`
                 ])
-                console.log('Docker process started')
+                // const commandString = command + ' ' + args.join(' ');
+                // console.log('Executing command:', commandString);
+                // console.log('Docker process started')
                 dockerProcess.stdout.on('data', (data) => {
                     console.log(`stdout: ${data}`);
                     // Set running to true or do something else
