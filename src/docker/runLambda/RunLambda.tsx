@@ -7,10 +7,12 @@ import Docker from 'dockerode';
 export const RunLambda: FC<{
     directoryPath: string;
     port: string
+    envFile?: string
     imageName?: string
 }> = ({
     directoryPath,
     port,
+    envFile,
     imageName
 }) => {
         const [building, setBuilding] = useState(true);
@@ -33,8 +35,15 @@ export const RunLambda: FC<{
         }, [])
         useEffect(() => {
             if (imageId) {
-                spawn('docker', ['run', '--platform', 'linux/amd64', '-p', `${port}:8080`, '-d', imageId], {
-                    stdio: 'inherit'
+                spawn('docker', [
+                    'run',
+                    '--platform',
+                    'linux/amd64',
+                    '-p',
+                    `${port}:8080`,
+                    '-d', imageId
+                ], {
+                    stdio: 'inherit',
                 })
                 // exec(`docker run --platform linux/amd64 -p ${port}:8080 -d ${imageId}`, (error, stdout, stderr) => {
                 //     if (error) {
