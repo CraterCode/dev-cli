@@ -10,8 +10,11 @@ import packageJson from '../package.json';
 
 program
 	.name('crater')
+	.version((() => {
+		const parts = packageJson.version.split('.').map(Number);
+		return `${parts[0]}.${parts[1]}.${parts[2]! + 1}`;
+	})())
 	.command('docker')
-	.version(packageJson.version)
 	.addCommand(new Command('runLambda')
 		.addOption(new Option('-p, --port <port>', 'port number')
 			.makeOptionMandatory()
