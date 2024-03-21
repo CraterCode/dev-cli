@@ -1,5 +1,5 @@
 {
-	"name": "@crater/dev-cli",
+	"name": "@cratercode/dev-cli",
 	"version": "0.0.1",
 	"license": "MIT",
 	"bin": {
