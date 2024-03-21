@@ -1,4 +1,4 @@
-import { exec, spawn } from "child_process";
+import { exec, spawn } from "node:child_process";
 import { Text } from "ink";
 import { FC, useEffect, useState } from "react";
 import React from 'react';
