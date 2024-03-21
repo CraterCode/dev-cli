@@ -33,18 +33,21 @@ export const RunLambda: FC<{
         }, [])
         useEffect(() => {
             if (imageId) {
-                exec(`docker run --platform linux/amd64 -p ${port}:8080 -d ${imageId}`, (error, stdout, stderr) => {
-                    if (error) {
-                        console.error(`error: ${error.message}`);
-                        return;
-                    }
-                    if (stderr) {
-                        console.error(`stderr: ${stderr}`);
-                        return;
-                    }
-                    console.log(`stdout: ${stdout}`);
-                    setRunning(true);
+                spawn('docker', ['run', '--platform', 'linux/amd64', '-p', `${port}:8080`, '-d', imageId], {
+                    stdio: 'inherit'
                 })
+                // exec(`docker run --platform linux/amd64 -p ${port}:8080 -d ${imageId}`, (error, stdout, stderr) => {
+                //     if (error) {
+                //         console.error(`error: ${error.message}`);
+                //         return;
+                //     }
+                //     if (stderr) {
+                //         console.error(`stderr: ${stderr}`);
+                //         return;
+                //     }
+                //     console.log(`stdout: ${stdout}`);
+                //     setRunning(true);
+                // })
             }
         }, [imageId])
         return (<>
