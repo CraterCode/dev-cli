@@ -1,4 +1,4 @@
-import { exec } from "child_process";
+import { exec, spawn } from "child_process";
 import { Text } from "ink";
 import { FC, useEffect, useState } from "react";
 import React from 'react';
@@ -33,18 +33,28 @@ export const RunLambda: FC<{
         }, [])
         useEffect(() => {
             if (imageId) {
-                exec(`docker run --platform linux/amd64 -p ${port}:8080 -d ${imageId}`, (error, stdout, stderr) => {
-                    if (error) {
-                        console.error(`error: ${error.message}`);
-                        return;
-                    }
-                    if (stderr) {
-                        console.error(`stderr: ${stderr}`);
-                        return;
-                    }
-                    console.log(`stdout: ${stdout}`);
+                const process = spawn('docker', [
+                    'run',
+                    '--platform', 'linux/amd64',
+                    '-p', `${port}:8080`,
+                    '-d', imageId
+                ])
+                process.stdout.on('data', (data) => {
+                    console.log(`stdout: ${data}`);
                     setRunning(true);
-                })
+                });
+                // exec(`docker run --platform linux/amd64 -p ${port}:8080 -d ${imageId}`, (error, stdout, stderr) => {
+                //     if (error) {
+                //         console.error(`error: ${error.message}`);
+                //         return;
+                //     }
+                //     if (stderr) {
+                //         console.error(`stderr: ${stderr}`);
+                //         return;
+                //     }
+                //     console.log(`stdout: ${stdout}`);
+                //     setRunning(true);
+                // })
             }
         }, [imageId])
         return (<>
