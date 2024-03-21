@@ -41,7 +41,20 @@ export const RunLambda: FC<{
                 ])
                 dockerProcess.stdout.on('data', (data) => {
                     console.log(`stdout: ${data}`);
-                    setRunning(true);
+                    // Set running to true or do something else
+                });
+
+                dockerProcess.stderr.on('data', (data) => {
+                    console.error(`stderr: ${data}`);
+                });
+
+                dockerProcess.on('exit', (code, signal) => {
+                    console.log(`Docker process exited with code ${code} and signal ${signal}`);
+                    // Set running to false or do some cleanup
+                });
+
+                dockerProcess.on('error', (err) => {
+                    console.error('Failed to start Docker process:', err);
                 });
                 process.stdin.resume()
                 // exec(`docker run --platform linux/amd64 -p ${port}:8080 -d ${imageId}`, (error, stdout, stderr) => {
