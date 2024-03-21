@@ -33,16 +33,17 @@ export const RunLambda: FC<{
         }, [])
         useEffect(() => {
             if (imageId) {
-                const process = spawn('docker', [
+                const dockerProcess = spawn('docker', [
                     'run',
                     '--platform', 'linux/amd64',
                     '-p', `${port}:8080`,
                     '-d', imageId
                 ])
-                process.stdout.on('data', (data) => {
+                dockerProcess.stdout.on('data', (data) => {
                     console.log(`stdout: ${data}`);
                     setRunning(true);
                 });
+                process.stdin.resume()
                 // exec(`docker run --platform linux/amd64 -p ${port}:8080 -d ${imageId}`, (error, stdout, stderr) => {
                 //     if (error) {
                 //         console.error(`error: ${error.message}`);
