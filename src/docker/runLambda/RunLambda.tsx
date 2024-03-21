@@ -27,7 +27,7 @@ export const RunLambda: FC<{
                     return;
                 }
                 console.log(`stdout: ${stdout}`);
-                setImageId(stdout.replace('sha256:', ''));
+                setImageId(stdout.replaceAll('sha256:', ''));
                 setBuilding(false);
             })
         }, [])
