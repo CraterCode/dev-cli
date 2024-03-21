@@ -4,7 +4,7 @@ import { FC, useEffect, useState } from "react";
 import React from 'react';
 import Spinner from 'ink-spinner';
 
-export const LocalLambda: FC<{
+export const RunLambda: FC<{
     directoryPath: string;
     port: string
     imageName?: string
