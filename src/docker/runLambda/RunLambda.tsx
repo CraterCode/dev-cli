@@ -37,9 +37,9 @@ export const RunLambda: FC<{
                 const command = 'docker';
                 const args = [
                     'run',
-                    '--platform', 'linux/amd64',
-                    '-p', `${port}:8080`,
-                    '-d', `${imageId}`
+                    '--platform', '"linux/amd64"',
+                    '-p', `"${port}:8080"`,
+                    '-d', `"${imageId}"`
                 ];
                 const dockerProcess = spawn(command, args)
                 const commandString = command + ' ' + args.join(' ');
