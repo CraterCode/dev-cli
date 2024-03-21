@@ -20,18 +20,18 @@ program
 			.makeOptionMandatory()
 		)
 		.addOption(new Option('-n, --image-name <image name>', 'docker image name'))
-		.addOption(new Option('-e, --env <env...>', 'ENV_NAME=env_value'))
+		.addOption(new Option('-e, --env-file <env-file>', '.env file'))
 		.argument('<directoryPath>', 'directory path')
 		.action((directoryPath, {
 			port,
 			imageName,
-			env
+			envFile
 		}) => {
 			render(<RunLambda
 				directoryPath={directoryPath}
 				port={port}
 				imageName={imageName}
-				env={env}
+				envFile={envFile}
 			/>)
 		})
 	)
