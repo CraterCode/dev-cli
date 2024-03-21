@@ -2,7 +2,8 @@
 	"extends": "@sindresorhus/tsconfig",
 	"compilerOptions": {
 		"outDir": "dist",
-		"noUnusedLocals": false
+		"noUnusedLocals": false,
+		"resolveJsonModule": true
 	},
 	"include": [
 		"src"
