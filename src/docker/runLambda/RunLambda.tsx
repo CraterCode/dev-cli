@@ -41,7 +41,12 @@ export const RunLambda: FC<{
                     '-p', `${port}:8080`,
                     '-d', `"${imageId}"`
                 ];
-                const dockerProcess = spawn(command, args)
+                const dockerProcess = spawn('docker', [
+                    'run',
+                    '--platform', '"linux/amd64"',
+                    '-p', `${port}:8080`,
+                    '-d', `"${imageId}"`
+                ], { shell: true })
                 const commandString = command + ' ' + args.join(' ');
                 console.log('Executing command:', commandString);
                 console.log('Docker process started')
