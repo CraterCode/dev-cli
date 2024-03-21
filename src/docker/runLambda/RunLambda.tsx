@@ -39,6 +39,7 @@ export const RunLambda: FC<{
                     '-p', `${port}:8080`,
                     '-d', imageId
                 ])
+                console.log('Docker process started')
                 dockerProcess.stdout.on('data', (data) => {
                     console.log(`stdout: ${data}`);
                     // Set running to true or do something else
