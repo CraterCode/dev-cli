@@ -1,0 +1,39 @@
+{
+	"name": "@crater/dev-cli",
+	"version": "0.0.0",
+	"license": "MIT",
+	"bin": {
+		"crater": "dist/cli.js"
+	},
+	"type": "module",
+	"engines": {
+		"node": ">=16"
+	},
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsc --watch",
+		"npmpub": "npm run build && git add . && git commit -m \"mod\" && git push && npm version patch && npm publish --access public",
+		"test": "prettier --check . && xo && ava"
+	},
+	"files": [
+		"dist"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/creatercode/dev-cli.git"
+	},
+	"dependencies": {
+		"@commander-js/extra-typings": "^12.0.1",
+		"ink": "^4.1.0",
+		"react": "^18.2.0"
+	},
+	"devDependencies": {
+		"@sindresorhus/tsconfig": "^3.0.1",
+		"@types/react": "^18.0.32",
+		"@vdemedes/prettier-config": "^2.0.1",
+		"chalk": "^5.2.0",
+		"ts-node": "^10.9.1",
+		"tsup": "^8.0.2",
+		"typescript": "^5.0.3"
+	}
+}
