@@ -11,7 +11,7 @@ export const LocalLambda: FC<{
 }) => {
         const [building, setBuilding] = useState(true);
         useEffect(() => {
-            exec('docker build -t test-image .', (error, stdout, stderr) => {
+            exec(`docker build -t test-image ${directoryPath}`, (error, stdout, stderr) => {
                 if (error) {
                     console.error(`error: ${error.message}`);
                     return;
