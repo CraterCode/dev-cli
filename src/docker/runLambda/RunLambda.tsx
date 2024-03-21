@@ -34,7 +34,8 @@ export const RunLambda: FC<{
         useEffect(() => {
             if (imageId) {
                 console.log(imageId)
-                const dockerProcess = spawn('docker run', [
+                const dockerProcess = spawn('docker', [
+                    'run',
                     '--platform', 'linux/amd64',
                     '-p', `${port}:8080`,
                     '-d', imageId
