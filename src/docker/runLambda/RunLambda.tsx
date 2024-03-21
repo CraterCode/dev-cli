@@ -35,14 +35,7 @@ export const RunLambda: FC<{
         }, [])
         useEffect(() => {
             if (imageId) {
-                spawn('docker', [
-                    'run',
-                    '--platform',
-                    'linux/amd64',
-                    '-p',
-                    `${port}:8080`,
-                    '-d', imageId
-                ], {
+                spawn('docker', ['run', '--platform', 'linux/amd64', '-p', `${port}:8080`, '-d', imageId], {
                     stdio: 'inherit',
                 })
                 // exec(`docker run --platform linux/amd64 -p ${port}:8080 -d ${imageId}`, (error, stdout, stderr) => {
